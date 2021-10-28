@@ -79,3 +79,13 @@ generateEl.addEventListener(`click`, () => {
 
   resultEl.innerText = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length);
 });
+
+
+
+clipboardEl.addEventListener(`click`, () => {
+  if (resultEl.innerText === ``) {
+    alert(`Please Generate A Password First`)
+    return;
+  }
+  navigator.clipboard.writeText(resultEl.innerText);
+})
