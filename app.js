@@ -1,26 +1,23 @@
 function randomIndex(str) {
   return Math.floor(Math.random() * str.length);
 }
-
 function getRandomLower() {
   const letters = `abcdefghijklmnopqrstuvwxyz`;
   return letters[randomIndex(letters)];
 }
-
 function getRandomUpper() {
   const letter = getRandomLower();
   return letter.toUpperCase();
 }
-
 function getRandomNumber() {
   const numbers = `1234567890`;
   return numbers[randomIndex(numbers)];
 }
-
 function getRandomSymbol() {
   const symbols = `!@#$%^&*(){}[]/,.`;
   return symbols[randomIndex(symbols)];
 }
+
 
 const randomFunctions = {
   lower: getRandomLower,
@@ -28,7 +25,6 @@ const randomFunctions = {
   number: getRandomNumber,
   symbol: getRandomSymbol,
 };
-
 const resultEl = document.querySelector(`#result`);
 const clipboardEl = document.querySelector(`#clipboard`);
 const lowercaseEl = document.querySelector(`#lowercase`);
@@ -38,9 +34,11 @@ const symbolEl = document.querySelector(`#symbols`);
 const lengthEl = document.querySelector(`#length`);
 const generateEl = document.querySelector(`#generate`);
 
+
 function generatePassword(lower, upper, number, symbol, length) {
   let generatePassword = ``;
   const typesCount = lower + upper + number + symbol;
+
   if (typesCount === 0) {
     alert(`Please select at least one option`);
     return ``;
@@ -60,7 +58,6 @@ function generatePassword(lower, upper, number, symbol, length) {
   for (i = 0; i < length; i += typesCount) {
     typesArr.forEach((type) => {
       const funcName = type[0];
-
       generatePassword += randomFunctions[funcName]();
     });
   }
@@ -74,26 +71,18 @@ generateEl.addEventListener(`click`, () => {
   const hasUpper = uppercaseEl.checked;
   const hasNumber = numberEl.checked;
   const hasSymbol = symbolEl.checked;
- 
   const length = parseInt(lengthEl.value);
-
-  // resultEl.innerText = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length);
 
   let moreRandomized = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length);
 
   moreRandomized = moreRandomized.split(``);
-  for (let i = 0; i <= length * 3; i++) {
+  for (let i = 0; i <= length * 5; i++) {
     let randomFactor = Math.floor(Math.random() * length);
-    moreRandomized.push(moreRandomized.splice(randomFactor, 1).join());
+    moreRandomized.push(moreRandomized.splice(randomFactor, 1));
   }
   let finalPassword = moreRandomized.join(``);
-  console.log(finalPassword);
-
   resultEl.innerText = finalPassword;
-
 });
-
-
 
 clipboardEl.addEventListener(`click`, () => {
   if (resultEl.innerText === ``) {
