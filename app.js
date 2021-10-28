@@ -82,7 +82,7 @@ generateEl.addEventListener(`click`, () => {
   let moreRandomized = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length);
 
   moreRandomized = moreRandomized.split(``);
-  for (let i = 0; i <= 24; i++) {
+  for (let i = 0; i <= length * 3; i++) {
     let randomFactor = Math.floor(Math.random() * length);
     moreRandomized.push(moreRandomized.splice(randomFactor, 1).join());
   }
