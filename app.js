@@ -77,7 +77,20 @@ generateEl.addEventListener(`click`, () => {
  
   const length = parseInt(lengthEl.value);
 
-  resultEl.innerText = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length);
+  // resultEl.innerText = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length);
+
+  let moreRandomized = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length);
+
+  moreRandomized = moreRandomized.split(``);
+  for (let i = 0; i <= 24; i++) {
+    let randomFactor = Math.floor(Math.random() * length);
+    moreRandomized.push(moreRandomized.splice(randomFactor, 1).join());
+  }
+  let finalPassword = moreRandomized.join(``);
+  console.log(finalPassword);
+
+  resultEl.innerText = finalPassword;
+
 });
 
 
